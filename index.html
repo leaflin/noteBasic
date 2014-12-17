@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="jquery/jquery.mobile-1.4.3.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="jquery/jquery.min.js"></script>
+<script type="text/jscript" src="js/BOOKDB.js"></script>
+<script type="text/javascript" src="jquery/jquery.mobile-1.4.3.min.js"></script>
+<link href="css/index.css" rel="stylesheet" type="text/css">
+<script type="text/jscript" src="js/note.js"></script>
+
+<script>
+$(function(){
+	$("#sendNickname").bind("click",nickNamw)
+	
+	
+	})
+function nickNamw(){
+	var nick=$("#nickName").val();
+	confirm("早安!"+nick)
+	var a=localStorage.setItem("nickName",nick);
+	} 
+</script>
+</head>
+
+<body>
+<div data-role="page" data-theme="b">
+<div class="indexBK">
+  <div data-role="main" class="ui-content">
+	<a href="noteBook.html" rel="external" class="ui-btn noteBtn ui-icon-tag ui-btn-icon-top">筆記</a>
+    <a href="nation.html" rel="external" class="ui-btn noteBtn ui-icon-tag ui-btn-icon-top">族群</a>
+    <input type="text" name="nickName" id="nickName" placeholder="輸入你的名字">
+       <input name="sendNickname" type="button" id="sendNickname" value="確定">
+
+  </div>
+</div>
+</div>
+
+
+</div>
+</body>
+</html>

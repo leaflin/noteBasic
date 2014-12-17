@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<script>
+$(document).bind("mobileinit", function(){
+    $.mobile.notesdb = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+    $.mobile.notesdb.transaction(function (tx) {
+	    tx.executeSql("CREATE TABLE IF NOT EXISTS Food (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL,details TEXT NOT NULL, created TEXT NOT NULL, updated TEXT);");			
+		
+		if (isLoadData==null){  // 第一次載入預設的資料 
+			localStorage.setItem("loaddata",true); // 第二次以後不載入預設的料	
+  			// 以 js/FoodData.js 建立資料庫
+			$.each(BookData, function(InfoIndex, Info) { 
+				var title = Info["title"];
+				t.executeSql('INSERT into mydbTable(title, details, created) VALUES (?,?,date("now"));',[title, details]);
+		    })
+		}
+
+		
+    });	
+});
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

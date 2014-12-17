@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<script type="text/javascript">
+var db = openDatabase('mydb4', '1.0', 'Test DBB', 2 * 1024 * 1024);
+db.transaction(function (tx) {
+  tx.executeSql('CREATE TABLE IF NOT EXISTS AA (id unique, log TEXT)');
+  tx.executeSql('INSERT INTO AA (id, log) VALUES (?,?)',[2,'hihihihi']);
+},
+				function(tx){
+					console.log("error");
+					document.getElementById('text').innerHTML="失敗";
+
+					},
+					function(tx){
+					console.log("sucess");
+					document.getElementById('text').innerHTML="成功了";
+					}
+
+
+);
+
+</script>
+</head>
+<body>
+<div id="text"></div>
+
+<div id="status" name="status">Status Message</div>
+</body>
+</html>

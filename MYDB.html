@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+<script type="text/javascript">
+var db=openDatabase('MYDB','1.0','my db Table',2*1024*1024);
+db.transaction(function(tx){
+					console.log("開始交易指令");
+					tx.executeSql("CREATE TABLE IF NOT EXISTS Lintable_old(id unique,username)");
+					tx.executeSql('INSERT INTO Lintable_old(id,username) VALUES (?,?)',[5,"todos2"],null,function(){alert("5成功");});
+					},
+				function(tx){
+					console.log("error");
+					document.getElementById('text').innerHTML="失敗";
+
+					},
+					function(tx){
+					console.log("sucess");
+					document.getElementById('text').innerHTML="成功了";
+					}		
+
+
+);
+function DelTable() {
+
+					db.transaction(function(t) {
+					t.executeSql("DROP TABLE Lintable",null,'function() {alert("刪除");}');
+					});
+					
+	
+}
+
+/*7月31資料庫練習*/
+</script>
+</head>
+
+<body>
+<div id="text"></div>
+<button onClick="DelTable()">刪除資料表</button>
+</body>
+</html>

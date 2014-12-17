@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>無標題文件</title>
+<link href="jquery/jquery.mobile-1.4.3.min.css" rel="stylesheet" type="text/css">
+<link href="css/noteBook.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="jquery/jquery.min.js"></script>
+<script src="js/note.js"></script>
+<script src="js/BOOKDB.js"></script>
+<script type="text/javascript" src="jquery/jquery.mobile-1.4.3.min.js"></script>
+
+<script>
+$(function(){
+	$("#nick").append(localStorage.getItem("nickName"))
+	})
+</script>
+</head>
+
+<body>
+<div data-role="page" data-theme="a" id="noteBook">
+<!--header-->
+<div data-role="header">
+<a href="index.html"  rel="external" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left">筆記舖</a>
+
+<h1 id="nick">歡迎使用者:</h1>				    
+
+ 
+ </div>
+<!--header-->
+<div data-role="main" class="ui-content">
+  <div data-role="navbar">
+    <ul>
+        <li><a href="#newNote" class="ui-icon-edit ui-btn-icon-bottom">新增</a></li>
+        <li><a href="#photo" class="ui-icon-camera ui-btn-icon-bottom">拍照</a></li>
+        <li><a href="#bullets" class="ui-icon-bullets ui-btn-icon-bottom">暫存清單</a></li>
+    </ul>
+  </div>
+  
+  <!-- /navbar --> 
+    <!--call json-->
+<!--<input name="" type="text" id="txtDel" value="">
+<input type="button" value="刪除資料" id="btnDelete" />
+-->
+<div id="entries">
+總筆數
+</div>
+   
+<ul id="recent" data-role="listview" data-inset="true">
+<li class="list">test</li>
+</ul>
+   
+     <!--call json-->
+  </div>
+</div>
+
+<!----------------noteBook page----------------------------------->
+
+<!--做一個display頁面-->
+<div data-role="page" id="display">
+ <div data-role="header">
+   <h1>display頁面</h1>
+    <a href="#noteBook" id="update" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left">回首頁</a>
+    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-left" id="delBtn">刪除</a>
+
+ </div>
+ <div data-role="main" class="ui-content">
+ 
+<div id="showdetail" class="detail"></div> 
+<label for="showdetail2">修改內容</label>  
+<textarea cols="40" rows="8" name="details" id="showdetail2" placeholder="更改記事">
+</textarea>
+         
+
+ </div>
+
+<div data-role="footer" data-position="fixed">
+<div data-role="navbar">
+        <ul>
+            <li><a href="#" id="bulletsCall" data-icon="bullets" data-theme="a">暫存清單</a></li>
+        </ul>
+    </div>
+</div>
+
+</div>
+
+
+<!----------------newPage----------------------------------------->
+<div data-role="page" id="newNote">
+  <div data-role="header">
+    <a href="#noteBook" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left">Home</a>
+    <a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-camera ui-btn-icon-left">camera</a>
+    <h1>新增頁面</h1>
+  </div>
+
+   <div data-role="main" class="ui-content">
+   <!--form content-->
+   <div class="ui-field-contain">
+   <label for="title" class="ui-hidden-accessible">標題</label>
+   <input type="text" name="title" id="title" placeholder="標題" value="">   
+   </div>
+   <div class="ui-field-contain" >
+   <label for="details" class="ui-hidden-accessible"></label>
+   <textarea cols="40" rows="8" name="details" id="details" placeholder="記事" ></textarea>
+   </div>
+   <input name="btn_insert" id="btn_insert" type="button" value="插入" >    
+
+   </div>
+   <!--form content-->
+   </div>
+</div>
+<!----------------newPage----------------------------------------->
+
+<!----------------暫存清單----------------------------------------->
+<div data-role="page" id="bullets">
+<div data-role="header">
+    <a href="#noteBook" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left">回首頁</a>
+    <h1>暫存清單</h1>
+</div>
+<div data-role="content">
+	<div id="showBulldata"></div>
+
+
+
+</div>
+
+
+
+<div data-role="footer" data-position="fixed">footer</div>
+
+</div>
+<!----------------照相----------------------------------------->
+<div data-role="page" id="photo">
+<div data-role="header">
+    <a href="#noteBook" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left">回首頁</a>
+    <h1>照相</h1>
+</div>
+<div data-role="content">
+
+   <img id="showPhoto">
+    <a id="btnPhoto" data-role="button" data-inline="true" >繼續拍攝</a>
+    <div id="prePhoto_box">                         
+        <div id="prePhoto"></div>                         
+    </div> 
+
+</div>
+
+
+
+<div data-role="footer" data-position="fixed">footer</div>
+
+</div>
+
+<!----------------照相----------------------------------------->
+
+</body>
+</html>

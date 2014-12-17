@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+.noteBtn{
+
+	}
+.indexBK{
+	background-color:#099;
+	height:100vh;
+	background-image: url(../image/indexBK.png);
+	background-repeat: no-repeat;
+	background-position: center center;	
+	background-size:cover;
+	
+	}

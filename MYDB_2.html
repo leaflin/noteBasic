@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>無標題文件</title>
+<script src="jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+var db;   // 建立全域變數
+$(function(){
+		dbCreate();	// 建立資料庫注意要引入有jq腳本↑
+		dbshow();
+/*var textb=$('#linkTT').append("link");
+var b='<a href="http://google.com" target="_blank">'+textb+'</a>';	
+$('#linkTT').append(textb+b);
+*/
+		$('#dbINSERT').bind("click",INSERTbtn);
+        $('#btnDelete').bind("click",DelItem);
+		some();
+});
+	
+function dbCreate(){
+db=openDatabase('MYDB','1.0','my db Table',2*1024*1024);
+if(db != null){
+db.transaction(function(tx){
+					console.log("開始交易指令");
+					tx.executeSql("CREATE TABLE IF NOT EXISTS LintableNew(id INTEGER PRIMARY KEY,username,listcustom)");
+					//tx.executeSql('INSERT INTO Lintable(id,username) VALUES (?,?)',[1,"todos2"]);
+					//tx.executeSql('INSERT INTO Lintable(id,username) VALUES (?,?)',[2,"todos2"]);
+tx.executeSql('INSERT INTO LintableNew(id,username,listcustom) VALUES (?,?,?)',[6,"todos2","new"],null,function(){console.log('以存在一筆資料')});
+tx.executeSql('INSERT INTO LintableNew(id,username,listcustom) VALUES (?,?,?)',[5,"why are u looks bull ","new"],null,function(){console.log('以存在一筆資料')});
+tx.executeSql('INSERT INTO LintableNew(id,username,listcustom) VALUES (?,?,?)',[4,"實習結束 ","new"],null,function(){console.log('以存在一筆資料')});
+tx.executeSql('INSERT INTO LintableNew(id,username,listcustom) VALUES (?,?,?)',[20,"實習結束 ","new"],null,function(){console.log('以存在一筆資料')});
+
+//8/2發現問題 為什麼db會建立失敗 因為建立一筆資料executeSql('INSERT INTO tables(id) VALUES (?)',[1],null,function(){})完整格式建立
+//executeSql(SQL,args,callback,error)
+					},
+				function(tx){
+					console.log("error");
+					$("#text").text("db失敗");
+
+					},
+					function(tx){
+					console.log("sucess");
+					$("#text").text("db建立成功");
+
+					}		
+)
+};
+};
+function DelTable() {
+
+					db.transaction(function(t) {
+					t.executeSql("DROP TABLE LintableNew");
+		            //t.executeSql("DELETE FROM Lintable WHERE id = 1");
+					});
+					
+					
+	
+}
+function dbshow(){
+	
+	db.transaction(function(tx){
+		tx.executeSql('SELECT id, username FROM LintableNew',[],function(tx,result)
+		{
+		for(var i=0; i<result.rows.length;i++){
+			var a='<a href="http://google.com" target="_blank">前往</a>';
+			console.log(result.rows.length);
+			$('#showALLdate').text("一共"+result.rows.length+"筆");
+			$('#showALLdateShow').append(result.rows.item(i).id+result.rows.item(i).username+"<br>");
+			}
+		
+		})
+		})
+	
+	}
+	
+function INSERTbtn(){
+	
+	db.transaction(function(t){var data=$('#txtData').val(); t.executeSql('INSERT INTO LintableNew(username) VALUES(?)',[data],function(){"成功"},function(){"失敗"})})
+	
+	}
+function DelItem(){
+	var id=$("#txtDel").val();
+	db.transaction(function(tx){
+		tx.executeSql('DELETE FROM LintableNew WHERE id=?',[id],function(){console.log("刪除一筆資料")})
+		},console.log("資料庫無開啟"),console.log("資料庫開啟"))
+	
+	};
+
+
+function some(){
+	db.transaction(function(tx){
+		tx.executeSql('SELECT username FROM LintableNew WHERE id=?',[20],function(){console.log("username值"+tx())})
+		},console.log("資料庫無開啟"),console.log("資料庫開啟"))
+	
+	};
+
+
+
+
+
+/*7月31資料庫練習*/
+</script>
+</head>
+
+<body>
+<div id="text"></div>
+<div id="showALLdate"></div>
+<div id="showALLdateShow"></div>
+<div id="linkTT"></div>
+
+<button onClick="DelTable()">刪除資料表</button>
+<input type="text" id="txtData">
+<input type="button" value="新增" id="dbINSERT">
+
+
+<input name="" type="text" id="txtDel" value="">
+ <input type="button" value="刪除資料" id="btnDelete" />
+
+</body>
+</html>
